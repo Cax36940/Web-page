@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camille Ordronneau</title>
+  <style>
+    body {
+      font-family: 'Georgia', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #ecf2f8;
+    }
+
+    header {
+      background-color: #3498db;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #4aa3df;
+      padding: 0.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 2rem;
+      display: none;
+      margin: 0 auto; /* Center the content */
+      max-width: 800px; /* Set a max-width for better readability on larger screens */
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      color: #2c3e50;
+    }
+
+    p {
+      color: #34495e;
+    }
+
+    .project {
+      margin-bottom: 2rem;
+    }
+
+    .project img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .p5 a{
+      color : #000000;
+      font-size : 16px;
+      font-weight : bold;
+      text-decoration: none;
+      margin: 0 1rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .p5 a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #3498db; 
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Camille Ordronneau</h1>
+    <p style="color: #ecf0f1;">Etudiant à l'ENSEIRB, 2ème année filiaire informatique</p>
+  </header>
+
+  <nav>
+    <a onclick="showTab('about')">A Propos</a>
+    <!--<a onclick="showTab('codingProjects')">Projets Scolaires</a>-->
+    <a onclick="showTab('otherProjects')">Projets Personnels</a>
+    <a onclick="showTab('contact')">Contact</a>
+  </nav>
+
+  <section id="about" class="active">
+    <h2>A Propos</h2>
+    <p>Je suis Camille Ordronneau, étudiant à l'ENSEIRB en 2ème année de la filaire informatique.
+    Je suis actuellement à la recherche d'un staged de trois mois en recherche informatique.
+    
+    
+    </p>
+  </section>
+
+   <!--<section id="codingProjects">
+    <h2>En construction</h2>
+
+    <div class="project">
+      <h3>Project 1</h3>
+      <p>Description of project 1.</p>
+      <!-- You can embed your p5.js project here -->
+      <!--<img src="project1-screenshot.jpg" alt="Project 1 Screenshot">
+    </div>
+
+    <div class="project">
+      <h3>Project 2</h3>
+      <p>Description of project 2.</p>
+      <!-- You can embed your p5.js project here -->
+      <!--<img src="project2-screenshot.jpg" alt="Project 2 Screenshot">
+    </div>
+
+    <!-- Add more coding project sections as needed -->
+
+  </section>
+  <section id="otherProjects">
+    <h2>Projets Personnels</h2>
+
+    <div class="project">
+      <h3>NeMu</h3>
+      <p>NeMu est un projet d'émulateur de NES sur lequel j'ai travaillé pendant une semaine en décembre 2022. Il a été réalisé en C avec SDL2 pour l'affichage.  <br>Ce projet est actuellement en pause.</p>
+      <img src="https://cdn.discordapp.com/attachments/1183020143001997443/1183020177093312562/image.png?ex=6586d065&is=65745b65&hm=79bf2951b76de2e112367ae17176eefdce95f5187968c65431ddd5b2d065c928&" alt="Project 3 Screenshot">
+    </div>
+
+    <div class="p5">
+      <h3>Projets sous p5.js</h3>
+      <p>J'ai pu réaliser plein de petits prototypes sous p5.js accessibles avec les liens ci-dessous :</p>
+      <!-- You can embed your p5.js project here -->
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/AW6rpU_jb" target="_blank">Apprentissage de vocabulaire (Juin 2023)</a>
+      <p>Site que j'ai crée afin d'apprendre du vocabulaire en japonais car la fonction "Apprentissage" du site Quizlet est devenue payante. Vous pouvez importer un fichier .txt dans lequel, sur chaque ligne, il y a une mot dans une langue, séparé de sa traduction par un des symboles suivant <span style="font-weight : bold; font-family: 'Courier New', monospace;">| ; : / \ + - * & </p>
+      <p>Exemple de fichier <span style="font-weight : bold; font-family: 'Courier New', monospace;">anglais.txt</span> à importer:</p>
+      <pre style="margin-left : 50px;">
+Hello:Bonjour
+Goodbye/Au revoir
+Thank you&Merci
+World|Monde
+Meal\Repas
+Banana;Banane
+Apple+Pomme
+Monday-Lundi
+      </pre>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/5rc-xXatA" target="_blank">Graphe de chemins (May 2023)</a>
+      <p>Nous avons eu un projet dans lequel nous devions trouver le chemin le plus court passant par un ensemble de points donnés (TSP) mais pour un robot possédant une vitesse de rotation. En plus de cela, des obstacles rectangulaires pouvaient être placé, ce qui rend la tache plus complexe. J'ai réalisé ce script afin de calculer le graphe complet, sur l'ensemble des points composé des deux points initiaux et des sommets des obstacles, mais auquel on enlève les arcs intersectant un obstacle.</p>
+       <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/-bdiMUGSN" target="_blank">Algorithme 2-opt (May 2023)</a>
+      <p>Visualisation de l'algorithme 2-opt appliqué à 100 points répartis de manière aléatoire. En plus de 2-opt, il y a une optimisation supplémentaire venant de moi et dont je n'ai trouvé aucune documentation.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/PBDMzBGdc" target="_blank">Algorithme A* (May 2023)</a>
+      <p>Script permettant de placer des points, de les relier, les déplacer, puis de calculer le chemin le plus court entre un départ et une arrivée à l'aide de l'algorithme A*.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/6X7ZaxC-o" target="_blank">Filtre de Canny (Juin 2021)</a>
+      <p>Mon TIPE de prépa a pu porter sur de l'analyse d'image, j'ai ainsi pu implémenter le filtre de Canny. Le filtre peut être activer ainsi que la binarisation. Deux slider permettent des modification : le pemier slider change le seuil de la binarisation et le deuxième modifie le degré de flou appliqué.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/4OGgvw_R2" target="_blank">Verbes irréguliers (Dec. 2020)</a>
+      <p>Site pour apprendre les verbes irréguliers en anglais. Là aussi cela a pu être utile pendant la prépa.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/Fzewjxez2" target="_blank">Onde Stationnaire (18 Sept. 2020)</a>
+      <p>Visualiseur d'onde progressive qui se reflète afin de créer une onde stationnaire. Cela m'a pu aider à mieux comprendre le consepte pendant la prépa.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/4G0_qZ-9O" target="_blank">Pendule de Newton (Juin 2020)</a>
+      <p>Pendule de Newton dont les billes sont manipulables avec la souris.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/2YOcRqTRC" target="_blank">Fractale (17 Avril 2020)</a>
+      <p>Petit programme permettant de visualiser des fractales de Julia. Le code est très simple mais ne permet pas un zoom considérable.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/BSJzKSBZh" target="_blank">Mutation Workshop (Avril 2020)</a>
+      <p>Jeu réalisé lors d'une GameJam organisé pendant le confinement sur Discord. Les monstres ne font pas de dégats, pour gagner il suffit d'appuyer sur espace, beaucoup de fois...</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/rO8aGs-nN" target="_blank">Kirby Minigame (Dec. 2019)</a>
+      <p>Un petit jeu où le but est de récupérer de la nourriture. La flèche ↑ permet de sauter et ↓ permet d'avancer un petit peu pour ne pas se faire attraper.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/-Bpr840T8" target="_blank">Lecteur de .obj (Dec. 2019)</a>
+      <p>Un lecteur de fichier .obj qui affiches en 3D seulement les sommets de l'objet. La rotation est modifiable avec la souris.</p>
+      <a href="https://editor.p5js.org/camille1.ordronneau@gmail.com/full/27G1mvcTH" target="_blank">Cube 3D (Nov. 2019)</a>
+      <p>Simple cube en 3D dont la rotation peut être modifiée avec la souris.</p>
+      
+    </div>
+    <!-- Add more other project sections as needed -->
+
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: camille1.ordronneau@gmail.com</p>
+    <p>LinkedIn: www.linkedin.com/in/camille-ordronneau-23b513250</p>
+    <p>GitHub: https://github.com/Cax36940</p>
+    <!-- Add more contact information as needed -->
+  </section>
+
+  <footer style="background-color: #3498db; padding: 1rem; text-align: center; color: #fff;">
+    <p style="margin: 10px; float: left; color: #ecf0f1;">Camille Ordronneau</p>
+    <p style="margin: 10px; float: right; color: #ecf0f1;">Créé avec ChatGPT 3.5</p>
+    <div style="clear: both;"></div>
+  </footer>
+
+  <script>
+    function showTab(tabId) {
+      // Hide all sections
+      document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+
+      // Show the selected section
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
