@@ -5,118 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camille Ordronneau</title>
-  <style>
-    body {
-      font-family: 'Georgia', sans-serif;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      background-color: #ecf2f8;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      background-color: #3498db;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #4aa3df;
-      padding: 0.5rem;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 1rem;
-      cursor: pointer;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    section {
-      padding: 2rem;
-      display: none;
-      margin: 0 auto;
-      /* Center the content */
-      max-width: 800px;
-      /* Set a max-width for better readability on larger screens */
-    }
-
-    section.active {
-      display: block;
-    }
-
-    h2 {
-      font-size: 20px;
-    }
-
-    h2 {
-      color: #2c3e50;
-    }
-
-    p {
-      color: #34495e;
-    }
-
-    .project {
-      margin-bottom: 2rem;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .p5 a {
-      color: #000000;
-      font-size: 16px;
-      font-weight: bold;
-      text-decoration: none;
-      margin: 0 1rem;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .p5 a:hover {
-      text-decoration: underline;
-    }
-
-    .contact_links a {
-      color: #34495e;
-      text-decoration: none;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .contact_links a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      background-color: #3498db;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      margin-top: auto;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="./primitives.js"></script>
 </head>
 
 <body>
 
   <header>
     <h1>Camille Ordronneau</h1>
-    <p style="color: #ecf0f1;">Etudiant à l'ENSEIRB, 2ème année filiaire informatique</p>
+    <p style="color: #ecf0f1;">Étudiant en dernière année de maîtrise à l'UQAC</p>
   </header>
 
   <nav>
@@ -128,15 +25,126 @@
 
   <section id="about" class="active">
     <h2>À Propos</h2>
-    <p>Je suis Camille Ordronneau, étudiant à l'ENSEIRB-MATMECA en 2ème année de la filière informatique.
+    <p>Je suis Camille Ordronneau, étudiant en double-diplôme à l'UQAC afin d'obtenir un double diplôme en informatique
+      spécialité jeux-vidéo
+      en plus d'un diplôme d'ingénieur informatique de l'ENSEIRB-MATMECA.
       Vous retrouverez sur cette page différents projets que j'ai pu faire sur mon temps libre.
 
 
     </p>
 
+    <div style="display: flex; justify-content: center; align-items: center;" id="canvasContainer"></div>
+
+    <script>
+
+
+      const gravity = 9.81;
+      let theta1, theta2; // Pendulum angles (radians)
+      let theta1_dot, theta2_dot; // Pendulum angular velocities (radians/second)
+      let t11, t12, t21, t22;
+      let l1, l2; // Pendulum masses and lengths
+      let bob1_x, bob1_y, bob2_x, bob2_y; // Bob positions
+      let dt = 0.1;
+      let hueValue = 0;
+      let frameCount = 0;
+
+      function setup() {
+        createCanvas("canvasContainer", 400, 400, "canvas");
+        noStroke();
+        // Initialize variables
+        l1 = 80;
+        l2 = 80;
+        theta1 = PI;
+        theta2 = PI / 2;
+        theta1_dot = 0.001;
+        theta2_dot = 0;
+      }
+
+      function systeme(theta, t, theta_dot, n) {
+        let a, b, w;
+
+        a = 1 / 2;
+        b = l2 / l1;
+        w = Math.sqrt(g / l1);
+
+        theta_dot[0] = theta[1];
+        theta_dot[2] = theta[3];
+
+        theta_dot[1] = (1 / (a * Math.cos(theta[0] - theta[2]) * Math.cos(theta[0] - theta[2]) - 1)) * (
+          -a * Math.cos(theta[0] - theta[2]) * (-theta[1] * theta[1] * Math.sin(theta[0] - theta[2]) + w * w * Math.sin(theta[2]))
+          + a * b * theta[3] * theta[3] * Math.sin(theta[0] - theta[2]) + w * w * Math.sin(theta[0])
+        );
+
+        theta_dot[3] = -(1 / b) * (theta_dot[1] * Math.cos(theta[0] - theta[2]) - (theta[1] * theta[1] * Math.sin(theta[0] - theta[2])) + w * w * Math.sin(theta[2]))
+        return (theta_dot);
+      }
+
+      function updatePendulum(dt) {
+        [t11, t12, t21, t22] = systeme([theta1, theta1_dot, theta2, theta2_dot], frameCount * dt, [t11, t12, t21, t22], 2); // Call the systeme function
+
+        // Update angles using Euler's method (adjust dt for better accuracy)
+        theta1_dot += t12 * dt
+        theta2_dot += t22 * dt
+        theta1 += theta1_dot * dt;
+        theta2 += theta2_dot * dt;
+
+        // Calculate bob positions
+        bob1_x = width.get() / 2 + l1 * Math.sin(theta1);
+        bob1_y = height.get() / 2 + l1 * Math.cos(theta1);
+        bob2_x = bob1_x + l2 * Math.sin(theta2);
+        bob2_y = bob1_y + l2 * Math.cos(theta2);
+      }
+
+      function draw() {
+        //background(220);
+        updatePendulum(dt); // Adjust dt based on desired simulation speed 
+
+        // Draw the pendulum
+        noStroke();
+        //fill(255, 0, 0);
+        //circle(width / 2, height / 2, 20); // fixed point
+
+        //fill(hueValue, 100, 50);
+        //circle(bob1_x, bob1_y, 15); // bob 1
+
+        fill(hsl_hex((hueValue + 180) % 360, 100, 50));
+        circle(bob2_x, bob2_y, 15); // bob 2
+        hueValue += 1;
+        if (hueValue >= 360) {
+          hueValue = 0;
+        }
+        // Draw the pendulum rods (optional)
+        //stroke(120);
+        //line(width / 2, height / 2, bob1_x, bob1_y);
+        //line(bob1_x, bob1_y, bob2_x, bob2_y);
+        frameCount++;
+        window.requestAnimationFrame(draw);
+      }
+
+      setup();
+      window.requestAnimationFrame(draw);
+
+
+    </script>
   </section>
 
   <!--<section id="codingProjects">
+
+
+    PFA
+    Reingold pdf
+
+    Vite + pdf
+
+    perso
+
+    ajout dans jeux turtle et tower defense
+
+    nemu
+    noname engine
+
+
+
     <h2>En construction</h2>
 
     <div class="project">
@@ -273,7 +281,7 @@ Monday-Lundi
       <p>Simple cube en 3D dont la rotation peut être modifiée avec la souris.</p>
 
     </div>
-    <!-- Add more other project sections as needed -->
+
 
   </section>
 
@@ -285,7 +293,7 @@ Monday-Lundi
           target="_blank">www.linkedin.com/in/camille-ordronneau-23b513250</a></p>
       <p>GitHub: <a href="https://github.com/Cax36940" target="_blank">https://github.com/Cax36940</a></p>
       <p>itch.io: <a href="https://cax36940.itch.io/" target="_blank">https://cax36940.itch.io/</a></p>
-    </div <!-- Add more contact information as needed -->
+    </div>
   </section>
 
   <footer style="background-color: #3498db; padding: 1rem; text-align: center; color: #fff;">
